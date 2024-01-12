@@ -1,2 +1,3 @@
-gobject
-pygobject
+customtkinter
+jinja2
+pdfkit
