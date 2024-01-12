@@ -2,28 +2,23 @@
 
 OS=$(uname)
 
-if [[ "$OS" == 'Darvin' ]]; then
-  echo "Installing dependencies..."
-  brew install pkg-config cairo gobject-introspection || { echo "Failed to install dependencies." ; exit 1; }
-
-  echo "Finished installing dependencies."
-
-  echo "Installing python dependencies..."
-  pip install -r requirements.txt || { echo "Failed to install python dependencies." ; exit 1; }
-
-  echo "Finished installing python dependencies."
-elif [[ "$OS" == 'Linux' ]]; then
-  echo "Updating system"
-  sudo apt update -y || { echo "Failed to update system." ; exit 1; }
-
-  echo "Installing dependencies..."
-  sudo apt install pkg-config cairo gobject-introspection -y || { echo "Failed to install dependencies." ; exit 1; }
-
-  echo "Finished installing dependencies."
-
-  echo "Installing python dependencies..."
-  pip install -r requirements.txt || { echo "Failed to install python dependencies." ; exit 1; }
-
-  echo "Finished installing python dependencies."
+if [[ "$OS" == "Darwin" ]]; then
+    # Install dependencies
+    clear
+    echo "OS: MacOS"
+    echo "Installing dependencies using brew..."
+    brew install wkhtmltopdf || { echo "Failed to install whtmltopdf" ; exit 1; }
+elif [[ "$OS" == "Linux" ]]; then
+    # Install dependencies
+    clear
+    echo "OS: Linux"
+    echo "Installing dependencies..."
+    sudo apt-get update
+    sudo apt-get install -y wkhtmltopdf || { echo "Failed to install whtmltopdf" ; exit 1; }
+else
+    echo "Unsupported OS detected"
+    exit 1
 fi
 
+clear
+echo "Dependencies installed successfully"
